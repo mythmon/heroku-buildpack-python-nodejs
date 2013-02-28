@@ -59,6 +59,17 @@ bpwatch start compile
 # We'll need to send these statics to other scripts we `source`.
 export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH
 
+# Check for node dependency and install
+if [ -f $BUILD_DIR/node.json ]; then
+  bpwatch start nodejs
+    echo "-----> Node.js dependency detected"
+    mv $BUILD_DIR/node.json $BUILD_DIR/package.json
+    echo "-----> Rename 'node.json' -> 'package.json'"
+    source $BIN_DIR/steps/nodejs
+    export PATH=$HOME/node_modules/.bin:$PATH
+  bpwatch stop nodejs
+fi
+
 # Syntax sugar.
 source $BIN_DIR/utils
 
@@ -188,7 +199,6 @@ set-default-env PYTHONPATH /app/
 
 # Install sane-default script for WEB_CONCURRENCY environment variable.
 cp $ROOT_DIR/vendor/python.webconcurrency.sh $WEBCONCURRENCY_PROFILE_PATH
-
 
 # Experimental post_compile hook.
 bpwatch start post_compile

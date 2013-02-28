@@ -1,7 +1,7 @@
-Heroku buildpack: Python
-========================
+Heroku buildpack: Buchner
+=========================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/).
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Buchner (or any other Python) apps, powered by [pip](http://www.pip-installer.org/).
 
 
 Usage
@@ -33,6 +33,27 @@ You can also add it to upcoming builds of an existing application:
 The buildpack will detect your app as Python if it has the file `requirements.txt` in the root.
 
 It will use Pip to install your dependencies, vendoring a copy of the Python runtime into your slug.
+
+Installing Node.js
+------------------
+
+If you create a `node.json` file within the root of the project, the buildpack
+will detect a Node.js dependency and install Node.js and npm.
+
+This `node.json` file should be a facsimile of a `package.json` file as outlined
+at http://package.json.nodejitsu.com/
+
+Additional build related tasks
+------------------------------
+
+Sometimes you will have project specific tasks that need to be completed at
+build time. This may be something like asset bundling or running migrations.
+
+You may provide a `Buildfile` file in the root, which is essentially a shell
+script to be run after all other standard build tasks are completed.
+
+You may use the `$BUILD_DIR` variable to refer to the build directory within
+this file.
 
 Specify a Runtime
 -----------------
