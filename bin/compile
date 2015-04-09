@@ -60,11 +60,9 @@ bpwatch start compile
 export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH
 
 # Check for node dependency and install
-if [ -f $BUILD_DIR/node.json ]; then
+if [ -f $BUILD_DIR/package.json ]; then
   bpwatch start nodejs
     echo "-----> Node.js dependency detected"
-    mv $BUILD_DIR/node.json $BUILD_DIR/package.json
-    echo "-----> Rename 'node.json' -> 'package.json'"
     source $BIN_DIR/steps/nodejs
     export PATH=$HOME/node_modules/.bin:$PATH
   bpwatch stop nodejs

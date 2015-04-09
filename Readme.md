@@ -37,11 +37,8 @@ It will use Pip to install your dependencies, vendoring a copy of the Python run
 Installing Node.js
 ------------------
 
-If you create a `node.json` file within the root of the project, the buildpack
+If you create a `package.json` file within the root of the project, the buildpack
 will detect a Node.js dependency and install Node.js and npm.
-
-This `node.json` file should be a facsimile of a `package.json` file as outlined
-at http://package.json.nodejitsu.com/
 
 Additional build related tasks
 ------------------------------
